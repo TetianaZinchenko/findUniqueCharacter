@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>findUniqueCharacter</title>
+    <link rel="stylesheet" href="./styles/styles.css" />
+  </head>
+  <body>
+    <h1>Алгоритм для пошуку унікального символу</h1>
+
+    <p>Алгоритм враховує те, чи це велика (прописна), чи це мала (рядкова) літера.</p>
+
+    <h2>Функція <code>findUniqueCharacter(word)</code>:</h2>
+    <ul>
+      <li>Створити порожній об'єкт <code>charCounts</code> для підрахунку кількості кожного символу у слові.</li>
+      <li>Для кожного символу <code>char</code> у слові <code>word</code>:<br/>
+      <p>Перевірити, чи містить об'єкт <code>charCounts</code> властивість з ключем <code>char</code>.</p>
+      <p>Якщо властивість існує, збільшити її значення на 1 і вивести це значення (<code>charCounts[char]</code>) у консоль.</p>
+      <p>Якщо властивість не існує, створити її з початковим значенням 1 і вивести це значення (<code>charCounts[char]</code>) у консоль.</p></li>
+      <li>Проходитись ще раз по символах <code>char</code> у слові <code>word</code>:<br/>
+        <p>Якщо значення властивості <code>charCounts[char]</code> дорівнює 1, вивести символ <code>char</code> у консоль та повернути його.</p>
+      </li>
+    <li>Якщо унікальний символ не знайдено, повернути <code>null</code>.</li>
+    </ul>
+        <h2>Функція <code>findFirstUniqueCharacter(text)</code>:</h2>
+    <ul>
+      <li>Розділити текст <code>text</code> на слова, використовуючи регулярний вираз <code>/\\s+/</code> для розділення за пробілами або іншими пробільними символами. Зберегти результат у змінну <code>words</code>.</li>
+      <li>Створити порожній масив <code>uniqueCharacters</code> для зберігання унікальних символів.</li>
+      <li>Для кожного слова <code>word</code> у масиві <code>words</code>:<br/>
+      <p>Знайти перший унікальний символ <code>uniqueChar</code>, використовуючи функцію <code>findUniqueCharacter(word)</code>.</p>
+    <p>Якщо <code>uniqueChar</code> не є <code>null</code>, додати його до масиву <code>uniqueCharacters</code>.</p></li>
+      <li>Проходитись по символах <code>char</code> у масиві <code>uniqueCharacters</code>:<br/>
+      <p>Створити змінну <code>remainingChars</code>, яка містить підмасив <code>uniqueCharacters</code>, починаючи з індексу, що йде після першого входження символу <code>char</code>.</p>
+      <p>Якщо символ <code>char</code> не зустрічається у <code>remainingChars</code>, вивести його у консоль та повернути його.</p>
+      </li>
+      <li>Якщо унікальний символ не знайдено, повернути <code>null</code>.</li>
+    </ul>
+    <p>Запитати у користувача ввести текст за допомогою <code>prompt</code> і зберегти його у змінну <code>inputText</code>.</p>
+    <p>Перевірити, чи <code>inputText</code> дорівнює <code>null</code> або чи складається лише з пробільних символів:</p>
+    <ul>
+      <li>Якщо так, вивести повідомлення про помилку у спливаючому вікні за допомогою <code>alert</code>.</li>
+      <li>Якщо ні, викликати функцію <code>findFirstUniqueCharacter(inputText)</code> і зберегти результат у змінну <code>uniqueCharacter</code>.</li>
+    </ul>
+    <p>Перевірити, чи <code>uniqueCharacter</code> не є <code>null</code>:</p>
+    <ul>
+      <li>Якщо так, створити змінну <code>result</code> з рядком "Унікальний символ: ", додати до неї <code>uniqueCharacter</code> і вивести результат у спливаючому вікні за допомогою <code>alert</code>.</li>
+      <li>Якщо ні, створити змінну <code>result</code> з рядком "Унікальний символ не знайдено." і вивести результат у спливаючому вікні за допомогою <code>alert</code>.</li>
+    </ul>
+
+    <h2>Код на JavaScript:</h2>
+
+    <pre>
+      <code>
+        function findUniqueCharacter(word) {
+        const charCounts = {};
+
+          // Підрахунок кількості кожного символу у слові
+          for (const char of word) {
+            if (charCounts.hasOwnProperty(char)) {
+              charCounts[char]++;
+              
+            } else {
+              charCounts[char] = 1;
+              
+            }
+          }
+
+          // Пошук першого унікального символу
+          for (const char of word) {
+            if (charCounts[char] === 1) {
+              
+              return char;
+            }
+          }
+
+          return null;
+        }
+
+        function findFirstUniqueCharacter(text) {
+          const words = text.split(/\s+/); // Розділення тексту на слова
+          
+          const uniqueCharacters = [];
+
+          // Знаходження першого унікального символу в кожному слові
+          for (const word of words) {
+            const uniqueChar = findUniqueCharacter(word);
+            
+            if (uniqueChar) {
+              uniqueCharacters.push(uniqueChar);
+              
+            }
+          }
+
+          // Пошук першого унікального символу в наборі
+          for (const char of uniqueCharacters) {
+            const remainingChars = uniqueCharacters.slice(uniqueCharacters.indexOf(char) + 1);
+            if (!remainingChars.includes(char)) {
+              
+              return char;
+            }
+          }
+
+          return null;
+        }
+
+        let inputText = prompt('Введіть текст:');
+            
+
+        if (inputText === null || inputText.trim() === '') {
+          alert('Текст не було введено. Будь ласка, перезавантажте сторінку і спробуйте знову.');
+        } else {
+          const uniqueCharacter = findFirstUniqueCharacter(inputText);
+          
+          let result = '';
+          if (uniqueCharacter) {
+            result = `Унікальний символ: ${uniqueCharacter}`;
+          } else {
+            result = 'Унікальний символ не знайдено.';
+          }
+
+          alert(result);
+        }
+      </code>
+    </pre>
+
+    <script src="main.js"></script>
+  </body>
+</html>
