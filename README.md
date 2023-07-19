@@ -23,3 +23,4 @@ This project is licensed under the
 - My name: Tetiana Zinchenko (https://github.com/TetianaZinchenko)
 - Email: zintarna@gmail.com
 - Project Link: https://github.com/TetianaZinchenko/findUniqueCharacter
+- Site is live at https://tetianazinchenko.github.io/findUniqueCharacter/
