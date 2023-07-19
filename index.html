@@ -17,14 +17,15 @@
       <li>Створити порожній об'єкт <code>charCounts</code> для підрахунку кількості кожного символу у слові.</li>
       <li>Для кожного символу <code>char</code> у слові <code>word</code>:<br/>
       <p>Перевірити, чи містить об'єкт <code>charCounts</code> властивість з ключем <code>char</code>.</p>
-      <p>Якщо властивість існує, збільшити її значення на 1 і вивести це значення (<code>charCounts[char]</code>) у консоль.</p>
-      <p>Якщо властивість не існує, створити її з початковим значенням 1 і вивести це значення (<code>charCounts[char]</code>) у консоль.</p></li>
-      <li>Проходитись ще раз по символах <code>char</code> у слові <code>word</code>:<br/>
-        <p>Якщо значення властивості <code>charCounts[char]</code> дорівнює 1, вивести символ <code>char</code> у консоль та повернути його.</p>
+      <p>Якщо властивість існує, збільшити її значення на 1.</p>
+      <p>Якщо властивість не існує, створити її з початковим значенням 1.</p></li>
+      <li>Пройтися ще раз по символах <code>char</code> у слові <code>word</code>:<br/>
+        <p>Якщо значення властивості <code>charCounts[char]</code> дорівнює 1, повернути його.</p>
       </li>
-    <li>Якщо унікальний символ не знайдено, повернути <code>null</code>.</li>
+      <li>Якщо унікальний символ не знайдено, повернути <code>null</code>.</li>
     </ul>
-        <h2>Функція <code>findFirstUniqueCharacter(text)</code>:</h2>
+
+    <h2>Функція <code>findFirstUniqueCharacter(text)</code>:</h2>
     <ul>
       <li>Розділити текст <code>text</code> на слова, використовуючи регулярний вираз <code>/\\s+/</code> для розділення за пробілами або іншими пробільними символами. Зберегти результат у змінну <code>words</code>.</li>
       <li>Створити порожній масив <code>uniqueCharacters</code> для зберігання унікальних символів.</li>
@@ -37,7 +38,9 @@
       </li>
       <li>Якщо унікальний символ не знайдено, повернути <code>null</code>.</li>
     </ul>
+
     <p>Запитати у користувача ввести текст за допомогою <code>prompt</code> і зберегти його у змінну <code>inputText</code>.</p>
+
     <p>Перевірити, чи <code>inputText</code> дорівнює <code>null</code> або чи складається лише з пробільних символів:</p>
     <ul>
       <li>Якщо так, вивести повідомлення про помилку у спливаючому вікні за допомогою <code>alert</code>.</li>
@@ -60,17 +63,14 @@
           for (const char of word) {
             if (charCounts.hasOwnProperty(char)) {
               charCounts[char]++;
-              
             } else {
               charCounts[char] = 1;
-              
             }
           }
 
           // Пошук першого унікального символу
           for (const char of word) {
             if (charCounts[char] === 1) {
-              
               return char;
             }
           }
@@ -89,7 +89,6 @@
             
             if (uniqueChar) {
               uniqueCharacters.push(uniqueChar);
-              
             }
           }
 
@@ -97,7 +96,6 @@
           for (const char of uniqueCharacters) {
             const remainingChars = uniqueCharacters.slice(uniqueCharacters.indexOf(char) + 1);
             if (!remainingChars.includes(char)) {
-              
               return char;
             }
           }
@@ -114,6 +112,7 @@
           const uniqueCharacter = findFirstUniqueCharacter(inputText);
           
           let result = '';
+          
           if (uniqueCharacter) {
             result = `Унікальний символ: ${uniqueCharacter}`;
           } else {
